@@ -61,4 +61,35 @@ background:linear-gradient(100deg,#b8892f,#f3d98b 50%,#d4a63c);box-shadow:0 8px 
 <div class="foot">TEKMA · Contabilidade</div>
 </main>
 
+<script>
+(function(){
+    var btn = document.getElementById('btn-email');
+    if (!btn) return;
+
+    var email = 'tekmaconsultoriacontabilidade@gmail.com';
+    var assunto = 'Contato via site TEKMA';
+
+    // Detecção de dispositivos móveis
+    var touch = (navigator.maxTouchPoints || 0) > 1;
+    var mobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    var isMobile = mobileUA || touch;
+
+    btn.addEventListener('click', function(e) {
+        e.preventDefault(); // Impede qualquer comportamento padrão da página
+
+        if (!isMobile) {
+            // No Computador: Abre o Gmail na web numa nova aba de forma limpa
+            var url = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(email) + '&su=' + encodeURIComponent(assunto);
+            var w = window.open(url, '_blank', 'noopener');
+            if (!w) {
+                window.location.href = url;
+            }
+        } else {
+            // No Telemóvel: Dispara o aplicativo de e-mail nativo corretamente
+            var mailtoUrl = 'mailto:' + email + '?subject=' + encodeURIComponent(assunto);
+            window.location.href = mailtoUrl;
+        }
+    });
+})();
+</script>
 </body></html>
